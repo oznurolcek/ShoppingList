@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LYC-cp-h2I">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,9 +16,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="w9Y-PN-OhS">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="w9Y-PN-OhS">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="productTVCell" id="FDO-Fc-qTJ" customClass="ProductsCell" customModule="ShoppingListProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FDO-Fc-qTJ" id="7aW-uN-uBI">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H3H-cW-xpB">
+                                                    <rect key="frame" x="16" y="8" width="50" height="54"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="gkk-wn-8GY"/>
+                                                        <constraint firstAttribute="height" constant="50" id="r3r-BG-7Uy"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeD-G6-166">
+                                                    <rect key="frame" x="90" y="11.000000000000002" width="259" height="21.666666666666671"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1M-sA-M2c">
+                                                    <rect key="frame" x="90" y="39.666666666666664" width="269" height="19.333333333333336"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.25098040700000002" green="0.25098040700000002" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="t1M-sA-M2c" secondAttribute="trailing" constant="14" id="0l7-Kt-P2n"/>
+                                                <constraint firstItem="t1M-sA-M2c" firstAttribute="leading" secondItem="H3H-cW-xpB" secondAttribute="trailing" constant="24" id="3jn-Hu-EaS"/>
+                                                <constraint firstItem="JeD-G6-166" firstAttribute="leading" secondItem="H3H-cW-xpB" secondAttribute="trailing" constant="24" id="77b-dX-qSr"/>
+                                                <constraint firstItem="H3H-cW-xpB" firstAttribute="leading" secondItem="7aW-uN-uBI" secondAttribute="leading" constant="16" id="Dpy-Bq-dqc"/>
+                                                <constraint firstItem="JeD-G6-166" firstAttribute="top" secondItem="7aW-uN-uBI" secondAttribute="topMargin" id="ZjH-gW-9QU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JeD-G6-166" secondAttribute="trailing" constant="24" id="g0J-6r-if6"/>
+                                                <constraint firstItem="t1M-sA-M2c" firstAttribute="bottom" secondItem="7aW-uN-uBI" secondAttribute="bottomMargin" id="kuK-3d-ZpO"/>
+                                                <constraint firstAttribute="bottom" secondItem="H3H-cW-xpB" secondAttribute="bottom" constant="8" id="lIC-X7-PWz"/>
+                                                <constraint firstItem="H3H-cW-xpB" firstAttribute="top" secondItem="7aW-uN-uBI" secondAttribute="top" constant="8" id="rY6-Uy-Dcv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="brandLabel" destination="JeD-G6-166" id="TsV-y3-ZTG"/>
+                                            <outlet property="priceLabel" destination="t1M-sA-M2c" id="zAf-BX-xSp"/>
+                                            <outlet property="productImage" destination="H3H-cW-xpB" id="Xpd-xi-YmJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

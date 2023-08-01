@@ -8,13 +8,17 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
     
 
     @IBOutlet weak var tableView: UITableView!
     
     var nameArray = [String]()
     var idArray = [UUID]()
+    var brandArray = [String]()
+    var priceArray = [Int]()
+    var imageArray = [Data]()
+
     
     var selectedProduct = ""
     var selectedProductUUID : UUID?
@@ -57,6 +61,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if let id = result.value(forKey: "id") as? UUID {
                         idArray.append(id)
                     }
+                    if let brand = result.value(forKey: "brand") as? String {
+                        brandArray.append(brand)
+                    }
+                    if let price = result.value(forKey: "price") as? Int {
+                        priceArray.append(price)
+                    }
+                    if let image = result.value(forKey: "image") as? Data {
+                        imageArray.append(image)
+                    }
                 }
             }
             tableView.reloadData()
@@ -67,22 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @objc func addProduct() {
-        performSegue(withIdentifier: "toDetailVC", sender: nil)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nameArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = nameArray[indexPath.row]
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedProduct = nameArray[indexPath.row]
-        selectedProductUUID = idArray[indexPath.row]
+        selectedProduct = ""
         performSegue(withIdentifier: "toDetailVC", sender: nil)
     }
     
@@ -92,6 +90,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             destinationVC.selectedProduct = selectedProduct
             destinationVC.selectedProductUUID = selectedProductUUID
         }
+    }
+
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource  {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return nameArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "productTVCell", for: indexPath) as! ProductsCell
+        cell.productImage.image = UIImage(data: imageArray[indexPath.row]) 
+        cell.brandLabel.text = "Brand: \(brandArray[indexPath.row])"
+        cell.priceLabel.text = "Price: \(String(priceArray[indexPath.row])) ₺"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedProduct = nameArray[indexPath.row]
+        selectedProductUUID = idArray[indexPath.row]
+        performSegue(withIdentifier: "toDetailVC", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -132,7 +152,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-
-
 }
 
