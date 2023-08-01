@@ -10,14 +10,9 @@ import CoreData
 
 class ViewController: UIViewController {
     
-
     @IBOutlet weak var tableView: UITableView!
     
-    var nameArray = [String]()
-    var idArray = [UUID]()
-    var brandArray = [String]()
-    var priceArray = [Int]()
-    var imageArray = [Data]()
+    var productModalArr = [ProductModel]()
 
     
     var selectedProduct = ""
@@ -49,11 +44,7 @@ class ViewController: UIViewController {
     
     @objc func getData() {
         
-        nameArray.removeAll(keepingCapacity: false)
-        idArray.removeAll(keepingCapacity: false)
-        brandArray.removeAll(keepingCapacity: false)
-        priceArray.removeAll(keepingCapacity: false)
-        imageArray.removeAll(keepingCapacity: false)
+        productModalArr.removeAll(keepingCapacity: false)
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -65,21 +56,23 @@ class ViewController: UIViewController {
             let results = try context.fetch(fetchRequest)
             if results.count > 0 {
                 for result in results as! [NSManagedObject] {
-                    if let name = result.value(forKey: "name") as? String {
-                        nameArray.append(name)
+                    guard let name = result.value(forKey: "name") as? String else {
+                        return
                     }
-                    if let id = result.value(forKey: "id") as? UUID {
-                        idArray.append(id)
+                    guard let id = result.value(forKey: "id") as? UUID else {
+                        return
                     }
-                    if let brand = result.value(forKey: "brand") as? String {
-                        brandArray.append(brand)
+                    guard let brand = result.value(forKey: "brand") as? String else {
+                        return
                     }
-                    if let price = result.value(forKey: "price") as? Int {
-                        priceArray.append(price)
+                    guard let price = result.value(forKey: "price") as? Int else {
+                        return
                     }
-                    if let image = result.value(forKey: "image") as? Data {
-                        imageArray.append(image)
+                    guard let image = result.value(forKey: "image") as? Data else {
+                        return
                     }
+                    
+                    productModalArr.append(ProductModel(name: name, id: id, brand: brand, price: price, image: image))
                 }
             }
             tableView.reloadData()
@@ -88,11 +81,6 @@ class ViewController: UIViewController {
         }
         
     }
-    
-//    @IBAction func filterButtonAct(_ sender: Any) {
-//        performSegue(withIdentifier: "toPickerVC", sender: nil)
-//    }
-    
     @objc func addProduct() {
         selectedProduct = ""
         performSegue(withIdentifier: "toDetailVC", sender: nil)
@@ -110,21 +98,21 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource  {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nameArray.count
+        return productModalArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "productTVCell", for: indexPath) as! ProductsCell
-        cell.productImage.image = UIImage(data: imageArray[indexPath.row]) 
-        cell.brandLabel.text = "Brand: \(brandArray[indexPath.row])"
-        cell.priceLabel.text = "Price: \(String(priceArray[indexPath.row])) ₺"
+        cell.productImage.image = UIImage(data: productModalArr[indexPath.row].image)
+        cell.brandLabel.text = "Brand: \(productModalArr[indexPath.row].brand)"
+        cell.priceLabel.text = "Price: \(String(productModalArr[indexPath.row].price)) ₺"
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedProduct = nameArray[indexPath.row]
-        selectedProductUUID = idArray[indexPath.row]
+        selectedProduct = productModalArr[indexPath.row].name
+        selectedProductUUID = productModalArr[indexPath.row].id
         performSegue(withIdentifier: "toDetailVC", sender: nil)
     }
     
@@ -134,7 +122,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource  {
             let context = appDelegate.persistentContainer.viewContext
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shopping")
-            let uuidString = idArray[indexPath.row].uuidString
+            let uuidString = productModalArr[indexPath.row].id.uuidString
             
             fetchRequest.predicate = NSPredicate(format: "id = %@", uuidString)
             fetchRequest.returnsObjectsAsFaults = false
@@ -144,10 +132,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource  {
                 if results.count > 0 {
                     for result in results as! [NSManagedObject] {
                         if let id = result.value(forKey: "id") as? UUID {
-                            if id == idArray[indexPath.row] {
+                            if id == productModalArr[indexPath.row].id {
                                 context.delete(result)
-                                nameArray.remove(at: indexPath.row)
-                                idArray.remove(at: indexPath.row)
+                                productModalArr.remove(at: indexPath.row)
                                 
                                 self.tableView.reloadData()
                                 do {

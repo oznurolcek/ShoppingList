@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8907EF0E2A7975EA00C22842 /* ProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8907EF0D2A7975EA00C22842 /* ProductsCell.swift */; };
 		8907EF102A799DDB00C22842 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8907EF0F2A799DDB00C22842 /* PickerViewController.swift */; };
+		89ECA3102A79B0F3004E5CA3 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECA30F2A79B0F3004E5CA3 /* ProductModel.swift */; };
 		89EE627729E8536400DF3552 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE627629E8536400DF3552 /* AppDelegate.swift */; };
 		89EE627929E8536400DF3552 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE627829E8536400DF3552 /* SceneDelegate.swift */; };
 		89EE627B29E8536400DF3552 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE627A29E8536400DF3552 /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		8907EF0D2A7975EA00C22842 /* ProductsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCell.swift; sourceTree = "<group>"; };
 		8907EF0F2A799DDB00C22842 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		89ECA30F2A79B0F3004E5CA3 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		89EE627329E8536400DF3552 /* ShoppingListProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingListProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EE627629E8536400DF3552 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89EE627829E8536400DF3552 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		89ECA30D2A79B0A7004E5CA3 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				89EE627A29E8536400DF3552 /* ViewController.swift */,
+				89EE628D29E8599A00DF3552 /* DetailViewController.swift */,
+				8907EF0F2A799DDB00C22842 /* PickerViewController.swift */,
+				8907EF0D2A7975EA00C22842 /* ProductsCell.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		89ECA30E2A79B0D8004E5CA3 /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				89ECA30F2A79B0F3004E5CA3 /* ProductModel.swift */,
+			);
+			path = entity;
+			sourceTree = "<group>";
+		};
+		89ECA3112A79B11F004E5CA3 /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				89EE627C29E8536400DF3552 /* Main.storyboard */,
+				89EE628429E8536600DF3552 /* LaunchScreen.storyboard */,
+			);
+			path = storyboards;
+			sourceTree = "<group>";
+		};
 		89EE626A29E8536400DF3552 = {
 			isa = PBXGroup;
 			children = (
@@ -66,15 +96,12 @@
 			children = (
 				89EE627629E8536400DF3552 /* AppDelegate.swift */,
 				89EE627829E8536400DF3552 /* SceneDelegate.swift */,
-				89EE627A29E8536400DF3552 /* ViewController.swift */,
-				89EE628D29E8599A00DF3552 /* DetailViewController.swift */,
-				89EE627C29E8536400DF3552 /* Main.storyboard */,
+				89ECA30D2A79B0A7004E5CA3 /* views */,
+				89ECA30E2A79B0D8004E5CA3 /* entity */,
+				89ECA3112A79B11F004E5CA3 /* storyboards */,
 				89EE628229E8536600DF3552 /* Assets.xcassets */,
-				89EE628429E8536600DF3552 /* LaunchScreen.storyboard */,
 				89EE628729E8536600DF3552 /* Info.plist */,
 				89EE627F29E8536400DF3552 /* ShoppingListProject.xcdatamodeld */,
-				8907EF0D2A7975EA00C22842 /* ProductsCell.swift */,
-				8907EF0F2A799DDB00C22842 /* PickerViewController.swift */,
 			);
 			path = ShoppingListProject;
 			sourceTree = "<group>";
@@ -157,6 +184,7 @@
 				89EE627929E8536400DF3552 /* SceneDelegate.swift in Sources */,
 				8907EF102A799DDB00C22842 /* PickerViewController.swift in Sources */,
 				8907EF0E2A7975EA00C22842 /* ProductsCell.swift in Sources */,
+				89ECA3102A79B0F3004E5CA3 /* ProductModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
