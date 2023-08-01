@@ -77,7 +77,15 @@
                             <constraint firstItem="w9Y-PN-OhS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wig-0U-xWb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Wish List" id="hsG-0p-Hx1"/>
+                    <navigationItem key="navigationItem" title="Wish List" id="hsG-0p-Hx1">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="line.3.horizontal.decrease.circle" catalog="system" id="Hos-JL-usp">
+                            <color key="tintColor" red="0.62604802849999996" green="0.46264481540000002" blue="0.97592741250000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="filterButtonAct:" destination="BYZ-38-t0r" id="8gX-Qr-gtE"/>
+                                <segue destination="hBN-VH-4Bh" kind="presentation" modalPresentationStyle="overCurrentContext" id="YZk-p9-tsn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="w9Y-PN-OhS" id="orx-Ut-mhb"/>
                         <segue destination="DFN-jR-gx8" kind="show" identifier="toDetailVC" id="BiI-L7-wCj"/>
@@ -86,6 +94,90 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1052.6717557251909" y="3.5211267605633805"/>
+        </scene>
+        <!--Picker View Controller-->
+        <scene sceneID="zEe-Hd-kw8">
+            <objects>
+                <viewController id="hBN-VH-4Bh" customClass="PickerViewController" customModule="ShoppingListProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P8m-60-oRK">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKn-0h-job">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hq4-2c-f49">
+                                        <rect key="frame" x="0.0" y="672" width="393" height="180"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="180" id="h53-dD-i0b"/>
+                                        </constraints>
+                                    </pickerView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3YG-Qu-I2E">
+                                        <rect key="frame" x="0.0" y="622" width="393" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZX-8o-0XW">
+                                                <rect key="frame" x="320.66666666666669" y="8" width="64.333333333333314" height="34"/>
+                                                <color key="tintColor" red="0.62604802849999996" green="0.46264481540000002" blue="0.97592741250000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Done"/>
+                                                <connections>
+                                                    <action selector="doneButtonAct:" destination="hBN-VH-4Bh" eventType="touchUpInside" id="NHh-c8-LVK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7un-Gb-pt3">
+                                                <rect key="frame" x="8" y="8" width="77" height="34"/>
+                                                <color key="tintColor" red="0.62604802849999996" green="0.46264481540000002" blue="0.97592741250000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="cancelButtonAct:" destination="hBN-VH-4Bh" eventType="touchUpInside" id="zQT-ER-YJa"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="FZX-8o-0XW" firstAttribute="top" secondItem="3YG-Qu-I2E" secondAttribute="top" constant="8" id="EuF-Kp-HFM"/>
+                                            <constraint firstItem="FZX-8o-0XW" firstAttribute="top" secondItem="3YG-Qu-I2E" secondAttribute="top" constant="8" id="Jcc-aT-u5x"/>
+                                            <constraint firstItem="7un-Gb-pt3" firstAttribute="top" secondItem="3YG-Qu-I2E" secondAttribute="top" constant="8" id="Q7g-Lx-Jmk"/>
+                                            <constraint firstAttribute="bottom" secondItem="FZX-8o-0XW" secondAttribute="bottom" constant="8" id="Vuk-2G-Ef5"/>
+                                            <constraint firstItem="7un-Gb-pt3" firstAttribute="leading" secondItem="3YG-Qu-I2E" secondAttribute="leading" constant="8" id="dg2-l4-eet"/>
+                                            <constraint firstAttribute="trailing" secondItem="FZX-8o-0XW" secondAttribute="trailing" constant="8" id="gda-uZ-Bi3"/>
+                                            <constraint firstAttribute="height" constant="50" id="huU-TL-bfP"/>
+                                            <constraint firstAttribute="bottom" secondItem="7un-Gb-pt3" secondAttribute="bottom" constant="8" id="sSN-ea-twb"/>
+                                            <constraint firstAttribute="bottom" secondItem="FZX-8o-0XW" secondAttribute="bottom" constant="8" id="vCC-xZ-fUy"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Hq4-2c-f49" secondAttribute="trailing" id="072-oy-cik"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hq4-2c-f49" secondAttribute="bottom" id="4ZR-7o-uua"/>
+                                    <constraint firstItem="3YG-Qu-I2E" firstAttribute="leading" secondItem="gKn-0h-job" secondAttribute="leading" id="Avk-D8-rb8"/>
+                                    <constraint firstItem="Hq4-2c-f49" firstAttribute="leading" secondItem="gKn-0h-job" secondAttribute="leading" id="IPZ-I2-6vK"/>
+                                    <constraint firstAttribute="trailing" secondItem="3YG-Qu-I2E" secondAttribute="trailing" id="NL2-h0-NYS"/>
+                                    <constraint firstItem="Hq4-2c-f49" firstAttribute="top" secondItem="3YG-Qu-I2E" secondAttribute="bottom" id="PfB-Uf-TJi"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zcI-dw-1mG"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gKn-0h-job" firstAttribute="top" secondItem="P8m-60-oRK" secondAttribute="top" id="nWs-jF-S9S"/>
+                            <constraint firstItem="gKn-0h-job" firstAttribute="leading" secondItem="zcI-dw-1mG" secondAttribute="leading" id="qOq-FE-0pb"/>
+                            <constraint firstAttribute="bottom" secondItem="gKn-0h-job" secondAttribute="bottom" id="uhN-7A-liu"/>
+                            <constraint firstItem="gKn-0h-job" firstAttribute="trailing" secondItem="zcI-dw-1mG" secondAttribute="trailing" id="vlk-Ps-x2I"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zRi-RT-c5o"/>
+                    <connections>
+                        <outlet property="contentView" destination="gKn-0h-job" id="rZk-r2-3Za"/>
+                        <outlet property="filterPickerView" destination="Hq4-2c-f49" id="1l3-Bt-mt8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tcl-b7-uM6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1840.4580152671756" y="332.3943661971831"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="QdX-Gd-cLg">
@@ -228,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rjh-TG-8vo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1736.6412213740457" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="1828" y="-314"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zzb-EB-d2j">
@@ -250,6 +342,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="line.3.horizontal.decrease.circle" catalog="system" width="128" height="123"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="98"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -51,6 +51,9 @@ class ViewController: UIViewController {
         
         nameArray.removeAll(keepingCapacity: false)
         idArray.removeAll(keepingCapacity: false)
+        brandArray.removeAll(keepingCapacity: false)
+        priceArray.removeAll(keepingCapacity: false)
+        imageArray.removeAll(keepingCapacity: false)
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -85,6 +88,10 @@ class ViewController: UIViewController {
         }
         
     }
+    
+//    @IBAction func filterButtonAct(_ sender: Any) {
+//        performSegue(withIdentifier: "toPickerVC", sender: nil)
+//    }
     
     @objc func addProduct() {
         selectedProduct = ""
