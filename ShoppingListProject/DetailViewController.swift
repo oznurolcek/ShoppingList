@@ -157,7 +157,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     func alertDialog(title : String, message : String) {
         let alertMessage = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
-        let okButton = UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default) { UIAlertAction in
+        let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { UIAlertAction in
         }
         alertMessage.addAction(okButton)
         self.present(alertMessage, animated: true)
