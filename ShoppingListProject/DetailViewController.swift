@@ -24,6 +24,11 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 215.0/255.0, green: 187.0/255.0, blue: 245.0/255.0, alpha: 1.0)]
+        
+        navigationController?.navigationBar.tintColor = UIColor(red: 160.0/255.0, green: 118.0/255.0, blue: 249.0/255.0, alpha: 1.0)
+
+        
         if selectedProduct != "" {
             
             saveButton.isHidden = true
@@ -62,6 +67,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                                 imageView.image = image
                             }
                         }
+                        navigationItem.title = nameTextField.text
                     }
                 } catch {
                     print("Error")
@@ -77,6 +83,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             sizeTextField.text = ""
             priceTextField.text = ""
             
+            navigationItem.title = "Add Wish"
             
         }
         
@@ -90,30 +97,43 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @IBAction func save(_ sender: Any) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
         
-        let shopping = NSEntityDescription.insertNewObject(forEntityName: "Shopping", into: context)
-        
-        shopping.setValue(nameTextField.text, forKey: "name")
-        shopping.setValue(brandTextField.text, forKey: "brand")
-        shopping.setValue(sizeTextField.text, forKey: "size")
-        if let price = Int(priceTextField.text!) {
-            shopping.setValue(price, forKey: "price")
+        if nameTextField.text == "" {
+            alertDialog(title: "Missing Entry!", message: "Please enter product name.")
+        } else if brandTextField.text == "" {
+            alertDialog(title: "Missing Entry!", message: "Please enter product brand.")
+        } else if sizeTextField.text == "" {
+            alertDialog(title: "Missing Entry!", message: "Please enter product size.")
+        } else if priceTextField.text == "" {
+            alertDialog(title: "Missing Entry!", message: "Please enter product price.")
+        } else {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            
+            let shopping = NSEntityDescription.insertNewObject(forEntityName: "Shopping", into: context)
+            
+            shopping.setValue(nameTextField.text, forKey: "name")
+            shopping.setValue(brandTextField.text, forKey: "brand")
+            shopping.setValue(sizeTextField.text, forKey: "size")
+            if let price = Int(priceTextField.text!) {
+                shopping.setValue(price, forKey: "price")
+            }
+            shopping.setValue(UUID(), forKey: "id")
+            let data = imageView.image!.jpegData(compressionQuality: 0.5)
+            shopping.setValue(data, forKey: "image")
+            
+            do {
+                try context.save()
+                print("Saved")
+            } catch {
+                print("Error")
+            }
+            
+            NotificationCenter.default.post(name: NSNotification.Name("Data entered."), object: nil)
+            self.navigationController?.popViewController(animated: true)
         }
-        shopping.setValue(UUID(), forKey: "id")
-        let data = imageView.image!.jpegData(compressionQuality: 0.5)
-        shopping.setValue(data, forKey: "image")
         
-        do {
-            try context.save()
-            print("Saved")
-        } catch {
-            print("Error")
-        }
         
-        NotificationCenter.default.post(name: NSNotification.Name("Data entered."), object: nil)
-        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func closeKeyboard() {
@@ -134,5 +154,14 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.dismiss(animated: true)
     }
     
+    func alertDialog(title : String, message : String) {
+        let alertMessage = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        let okButton = UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default) { UIAlertAction in
+        }
+        alertMessage.addAction(okButton)
+        self.present(alertMessage, animated: true)
+
+    }
 
 }
