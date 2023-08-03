@@ -33,6 +33,11 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             
             saveButton.isHidden = true
             
+            nameTextField.isUserInteractionEnabled = false
+            brandTextField.isUserInteractionEnabled = false
+            sizeTextField.isUserInteractionEnabled = false
+            priceTextField.isUserInteractionEnabled = false
+            
             if let uuidString = selectedProductUUID?.uuidString {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let context = appDelegate.persistentContainer.viewContext
