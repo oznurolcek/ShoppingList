@@ -9,14 +9,20 @@ import UIKit
 import CoreData
 
 class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
+    @IBOutlet weak var linkButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
+    
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var brandTextField: UITextField!
     @IBOutlet weak var sizeTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var linkTextField: UITextField!
+    
+    @IBOutlet weak var linkLabel: UILabel!
+    
     
     var selectedProduct = ""
     var selectedProductUUID : UUID?
@@ -37,6 +43,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             brandTextField.isUserInteractionEnabled = false
             sizeTextField.isUserInteractionEnabled = false
             priceTextField.isUserInteractionEnabled = false
+            
+            linkTextField.isHidden = true
+            linkLabel.isHidden = true
             
             if let uuidString = selectedProductUUID?.uuidString {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -71,8 +80,15 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                                 let image = UIImage(data: imageData)
                                 imageView.image = image
                             }
+                            if let link = result.value(forKey: "link") as? String {
+                                linkTextField.text = link
+                            }
                         }
                         navigationItem.title = nameTextField.text
+                        
+                        if linkTextField.text == "" {
+                            linkButton.isHidden = true
+                        }
                     }
                 } catch {
                     print("Error")
@@ -87,6 +103,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             brandTextField.text = ""
             sizeTextField.text = ""
             priceTextField.text = ""
+            linkTextField.text = ""
+            linkButton.isHidden = true
             
             navigationItem.title = "Add Wish"
             
@@ -126,6 +144,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             shopping.setValue(UUID(), forKey: "id")
             let data = imageView.image!.jpegData(compressionQuality: 0.5)
             shopping.setValue(data, forKey: "image")
+            shopping.setValue(linkTextField.text, forKey: "link")
             
             do {
                 try context.save()
@@ -140,7 +159,17 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         
     }
+        
+    @IBAction func linkButtonAct(_ sender: Any) {
+        performSegue(withIdentifier: "toWebsiteVC", sender: nil)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toWebsiteVC" {
+            let destinationVC = segue.destination as! WebsiteViewController
+            destinationVC.link = linkTextField.text
+        }
+    }
     @objc func closeKeyboard() {
         view.endEditing(true)
     }
