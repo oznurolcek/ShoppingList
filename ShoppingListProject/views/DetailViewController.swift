@@ -14,7 +14,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var brandTextField: UITextField!
     @IBOutlet weak var sizeTextField: UITextField!
@@ -22,7 +21,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var linkTextField: UITextField!
     
     @IBOutlet weak var linkLabel: UILabel!
-    
     
     var selectedProduct = ""
     var selectedProductUUID : UUID?
@@ -34,7 +32,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         navigationController?.navigationBar.tintColor = UIColor(red: 160.0/255.0, green: 118.0/255.0, blue: 249.0/255.0, alpha: 1.0)
 
-        
         if selectedProduct != "" {
             
             saveButton.isHidden = true
@@ -156,8 +153,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             NotificationCenter.default.post(name: NSNotification.Name("Data entered."), object: nil)
             self.navigationController?.popViewController(animated: true)
         }
-        
-        
     }
         
     @IBAction func linkButtonAct(_ sender: Any) {
@@ -170,6 +165,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             destinationVC.link = linkTextField.text
         }
     }
+    
     @objc func closeKeyboard() {
         view.endEditing(true)
     }

@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     
     var productModalArr = [ProductModel]()
 
-    
     var selectedProduct = ""
     var selectedProductUUID : UUID?
     
@@ -24,9 +23,6 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(addProduct))
         
         navigationController?.navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor(red: 160.0/255.0, green: 118.0/255.0, blue: 249.0/255.0, alpha: 1.0)
-        
-        
-       
         
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 215.0/255.0, green: 187.0/255.0, blue: 245.0/255.0, alpha: 1.0)]
         
@@ -81,6 +77,7 @@ class ViewController: UIViewController {
         }
         
     }
+    
     @objc func addProduct() {
         selectedProduct = ""
         performSegue(withIdentifier: "toDetailVC", sender: nil)
@@ -93,7 +90,6 @@ class ViewController: UIViewController {
             destinationVC.selectedProductUUID = selectedProductUUID
         }
     }
-
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource  {
