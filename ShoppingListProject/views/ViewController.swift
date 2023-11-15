@@ -11,11 +11,14 @@ import CoreData
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var productModalArr = [ProductModel]()
 
     var selectedProduct = ""
     var selectedProductUUID : UUID?
+    
+    var isSearch = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,8 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        searchBar.delegate = self
+        
         getData()
 
     }
@@ -36,7 +41,6 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name("Data entered."), object: nil)
     }
-    
     
     @objc func getData() {
         
@@ -77,6 +81,52 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    func searchProduct (_ searchText: String) {
+           let appDelegate = UIApplication.shared.delegate as! AppDelegate
+           let context = appDelegate.persistentContainer.viewContext
+
+           let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Shopping")
+           fetchRequest.returnsObjectsAsFaults = false
+
+           if searchText.isEmpty {
+               isSearch = false
+           } else {
+               isSearch = true
+               fetchRequest.predicate = NSPredicate(format: "brand CONTAINS %@", searchText)
+           }
+
+           do {
+               let results = try context.fetch(fetchRequest)
+               productModalArr.removeAll()
+
+               if results.count > 0 {
+                   for result in results as! [NSManagedObject] {
+                       guard let name = result.value(forKey: "name") as? String else {
+                           return
+                       }
+                       guard let id = result.value(forKey: "id") as? UUID else {
+                           return
+                       }
+                       guard let brand = result.value(forKey: "brand") as? String else {
+                           return
+                       }
+                       guard let price = result.value(forKey: "price") as? Int else {
+                           return
+                       }
+                       guard let image = result.value(forKey: "image") as? Data else {
+                           return
+                       }
+
+                       productModalArr.append(ProductModel(name: name, id: id, brand: brand, price: price, image: image))
+                   }
+               }
+
+               tableView.reloadData()
+           } catch {
+               print("Error")
+           }
+       }
     
     @objc func addProduct() {
         selectedProduct = ""
@@ -148,6 +198,19 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource  {
                 print("Error")
             }
         }
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            isSearch = false
+            getData()
+        } else {
+            isSearch = true
+            searchProduct(searchText)
+        }
+        tableView.reloadData()
     }
 }
 

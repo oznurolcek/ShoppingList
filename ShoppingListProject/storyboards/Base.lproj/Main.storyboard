@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,8 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="w9Y-PN-OhS">
-                                <rect key="frame" x="0.0" y="119" width="393" height="699"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="159" width="393" height="659"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <color key="sectionIndexBackgroundColor" name="Background"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="productTVCell" id="FDO-Fc-qTJ" customClass="ProductsCell" customModule="ShoppingListProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="70"/>
@@ -48,6 +50,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" name="Background"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="t1M-sA-M2c" secondAttribute="trailing" constant="14" id="0l7-Kt-P2n"/>
                                                 <constraint firstItem="t1M-sA-M2c" firstAttribute="leading" secondItem="H3H-cW-xpB" secondAttribute="trailing" constant="24" id="3jn-Hu-EaS"/>
@@ -60,6 +63,7 @@
                                                 <constraint firstItem="H3H-cW-xpB" firstAttribute="top" secondItem="7aW-uN-uBI" secondAttribute="top" constant="8" id="rY6-Uy-Dcv"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="Background"/>
                                         <connections>
                                             <outlet property="brandLabel" destination="JeD-G6-166" id="TsV-y3-ZTG"/>
                                             <outlet property="priceLabel" destination="t1M-sA-M2c" id="zAf-BX-xSp"/>
@@ -68,14 +72,25 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="Search by product brand..." translatesAutoresizingMaskIntoConstraints="NO" id="oLI-Ig-otZ">
+                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Ypn-Bw-OvO"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="w9Y-PN-OhS" secondAttribute="bottom" id="BYd-Ij-8zb"/>
+                            <constraint firstItem="oLI-Ig-otZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Gr3-ZE-Rtv"/>
+                            <constraint firstAttribute="trailing" secondItem="oLI-Ig-otZ" secondAttribute="trailing" id="JzQ-Kx-m4G"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="w9Y-PN-OhS" secondAttribute="trailing" id="NhU-pE-ptB"/>
-                            <constraint firstItem="w9Y-PN-OhS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="kgX-G8-6Ge"/>
+                            <constraint firstItem="w9Y-PN-OhS" firstAttribute="top" secondItem="oLI-Ig-otZ" secondAttribute="bottom" id="sRo-bJ-oNA"/>
                             <constraint firstItem="w9Y-PN-OhS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wig-0U-xWb"/>
+                            <constraint firstItem="oLI-Ig-otZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xco-M9-udW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Wish List" id="hsG-0p-Hx1">
@@ -88,6 +103,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="oLI-Ig-otZ" id="Tc3-MO-yMq"/>
                         <outlet property="tableView" destination="w9Y-PN-OhS" id="orx-Ut-mhb"/>
                         <segue destination="DFN-jR-gx8" kind="show" identifier="toDetailVC" id="BiI-L7-wCj"/>
                     </connections>
@@ -194,6 +210,7 @@
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R9v-oZ-oXd">
                                 <rect key="frame" x="31" y="413" width="331" height="34"/>
+                                <color key="backgroundColor" name="OnBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Cxq-jE-fnP"/>
                                 </constraints>
@@ -202,6 +219,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Brand" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F7s-ot-z6k">
                                 <rect key="frame" x="31" y="484" width="331" height="34"/>
+                                <color key="backgroundColor" name="OnBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="SKQ-Hn-j75"/>
                                 </constraints>
@@ -210,6 +228,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9J-PK-sTI">
                                 <rect key="frame" x="31" y="626" width="331" height="34"/>
+                                <color key="backgroundColor" name="OnBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="6xP-Q1-2KF"/>
                                 </constraints>
@@ -218,6 +237,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Size" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cfp-do-8vM">
                                 <rect key="frame" x="31" y="555" width="331" height="34"/>
+                                <color key="backgroundColor" name="OnBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="RIm-qa-FL6"/>
                                 </constraints>
@@ -283,6 +303,7 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ClU-BD-AEC">
                                 <rect key="frame" x="31" y="697" width="331" height="34"/>
+                                <color key="backgroundColor" name="OnBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="epS-Ty-Ocn"/>
                                 </constraints>
@@ -305,7 +326,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CE1-xD-4Sj"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="yrE-Ze-tRN" firstAttribute="leading" secondItem="ClU-BD-AEC" secondAttribute="leading" id="0XH-vM-NW1"/>
                             <constraint firstItem="wWV-gS-Yle" firstAttribute="trailing" secondItem="yrE-Ze-tRN" secondAttribute="trailing" id="2NE-q6-QKB"/>
@@ -423,6 +444,12 @@
     <resources>
         <image name="line.3.horizontal.decrease.circle" catalog="system" width="128" height="123"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="98"/>
+        <namedColor name="Background">
+            <color red="0.98431372549019602" green="0.97254901960784312" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="OnBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
