@@ -93,7 +93,7 @@ class ViewController: UIViewController {
                isSearch = false
            } else {
                isSearch = true
-               fetchRequest.predicate = NSPredicate(format: "brand CONTAINS %@", searchText)
+               fetchRequest.predicate = NSPredicate(format: "brand CONTAINS[c] %@", searchText)
            }
 
            do {
